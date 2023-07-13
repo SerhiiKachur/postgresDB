@@ -1,4 +1,5 @@
 CREATE TABLE users(
+  id INTEGER PRIMARY KEY,
   first_name VARCHAR(64)NOT NULL CHECK (first_name != ''),
   last_name VARCHAR(64)NOT NULL CHECK (last_name != ''),
   email VARCHAR(256)NOT NULL UNIQUE CHECK (email ~ '^[a-zA-Z0-9]{1,32}@[a-z]{2,32}\.$'),
