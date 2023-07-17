@@ -17,3 +17,7 @@ VALUES
 UPDATE users SET weight = 60;
 UPDATE users SET weight = 75 WHERE is_male = TRUE;
 UPDATE users SET height = 1.67 WHERE id = 3;
+
+UPDATE users SET is_male = false WHERE id =3;
+
+DELETE FROM users WHERE id = 3;
