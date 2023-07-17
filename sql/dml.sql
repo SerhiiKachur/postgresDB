@@ -26,3 +26,10 @@ DELETE FROM users; -- delete all
 
 UPDATE users SET raiting = 3.50 WHERE id = 8 RETURNING id,raiting;
 DELETE FROM users WHERE id = 9 RETURNING *;
+
+UPDATE users SET 
+first_name = 'Anton', 
+last_name = 'Shevchenko', 
+email = 'antonsheva@mail.com',
+weight = 123
+WHERE id = 8;
