@@ -24,3 +24,14 @@ CREATE TABLE task_users (
   CONSTRAINT "Unique full name" UNIQUE (first_name,last_name),
   CONSTRAINT "User must have correct name" CHECK (first_name != '' AND last_name != '')
 )
+
+DROP TABLE task_users;
+
+ALTER TABLE users ADD COLUMN eye_color VARCHAR (100) NOT NULL DEFAULT 'brown' CHECK(eye_color != ''),
+ADD COLUMN hair_color VARCHAR (100) CHECK (hair_color != '');
+
+ALTER TABLE users DROP COLUMN hair_color;
+
+ALTER TABLE users ADD COLUMN weight NUMERIC CONSTRAINT "weigth must be 1-500kg" CHECK (weight >= 1 AND weight <= 500),ADD COLUMN raiting NUMERIC (2,1) CONSTRAINT "raiting must be 1.0-5.0" CHECK (raiting >= 1 AND raiting <= 5);
+
+ALTER TABLE users DROP COLUMN weight;
