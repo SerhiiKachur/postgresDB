@@ -21,3 +21,8 @@ UPDATE users SET height = 1.67 WHERE id = 3;
 UPDATE users SET is_male = false WHERE id =3;
 
 DELETE FROM users WHERE id = 3;
+DELETE FROM users; -- delete all 
+
+
+UPDATE users SET raiting = 3.50 WHERE id = 8 RETURNING id,raiting;
+DELETE FROM users WHERE id = 9 RETURNING *;
