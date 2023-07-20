@@ -35,3 +35,7 @@ ALTER TABLE users DROP COLUMN hair_color;
 ALTER TABLE users ADD COLUMN weight NUMERIC CONSTRAINT "weigth must be 1-500kg" CHECK (weight >= 1 AND weight <= 500),ADD COLUMN raiting NUMERIC (2,1) CONSTRAINT "raiting must be 1.0-5.0" CHECK (raiting >= 1 AND raiting <= 5);
 
 ALTER TABLE users DROP COLUMN weight;
+
+-- new DATABASE
+
+CREATE DATABASE not_rozetka;
