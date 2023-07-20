@@ -90,3 +90,18 @@ VALUES (2, 2, 2),
 (5, 2, 1),
 (5, 1, 1);
 
+
+CREATE TABLE manufacturers(
+  id SERIAL PRIMARY KEY,
+  user_id INT NOT NULL UNIQUE REFERENCES users,
+  created_at timestamp NOT NULL DEFAULT current_timestamp,
+  updated_at timestamp NOT NULL DEFAULT current_timestamp
+);
+
+
+ALTER TABLE users
+ADD COLUMN manufacturers_id INT UNIQUE REFERENCES manufacturers;
+
+INSERT INTO manufacturers (user_id) VALUES (2);
+
+UPDATE users SET manufacturers_id = 1 WHERE id = 2;
