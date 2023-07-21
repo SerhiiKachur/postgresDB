@@ -121,3 +121,6 @@ DROP TABLE orders CASCADE;
 DROP TABLE products_to_orders CASCADE;
 DROP TABLE manufacturers CASCADE;
 DROP TABLE products CASCADE;
+
+DROP TABLE scripted_table CASCADE;
+DROP TABLE users;
