@@ -117,3 +117,7 @@ UPDATE users SET manufacturers_id = 1 WHERE id = 2;
 
 
 DROP TABLE users CASCADE;
+DROP TABLE orders CASCADE;
+DROP TABLE products_to_orders CASCADE;
+DROP TABLE manufacturers CASCADE;
+DROP TABLE products CASCADE;
