@@ -1,0 +1,20 @@
+{
+  "hairColors": [
+    "black",
+    "brown",
+    "blonde",
+    "red",
+    "ginger",
+    "blue",
+    "white",
+    "green",
+    "pale",
+    "rainbow"
+  ],
+  "minWeight" : 50,
+  "maxWeigth": 150,
+  "minHeight":1,
+  "maxHeight":3,
+  "minFootSize":20,
+  "maxFootSize":50
+}
