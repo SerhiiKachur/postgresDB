@@ -31,7 +31,7 @@ FROM users
 GROUP BY hair_color
 HAVING count(*) > 30;
 
-SELECT count (*), hair_color
+SELECT avg(foot_size), hair_color
 FROM users
-GROUP BY foot_size
-HAVING avg(foot_size) > 30;
+GROUP BY hair_color
+HAVING avg(foot_size) >= 35;

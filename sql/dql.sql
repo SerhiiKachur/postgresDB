@@ -15,3 +15,5 @@ WHERE length(concat(first_name, ' ', last_name)) < 16
 
 SELECT * FROM (SELECT id, email, concat(first_name, ' ', last_name) AS "full_name", birthday
 FROM users) AS "user_full_name" WHERE length(full_name) < 16;
+
+SELECT * FROM users ORDER BY height DESC, foot_size ASC;
