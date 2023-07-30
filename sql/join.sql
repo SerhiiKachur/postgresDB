@@ -34,4 +34,13 @@ WHERE p.category ILIKE 'food'
 GROUP BY order_id
 ORDER BY count(*) DESC;
 
+SELECT *
+FROM
+products p -- left
+LEFT JOIN
+products_to_orders pto -- right
+ON p.id = pto.product_id
+ORDER BY p.id;
+
+
 
