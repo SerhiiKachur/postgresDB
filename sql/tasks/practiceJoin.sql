@@ -105,5 +105,20 @@ FROM (
   GROUP BY order_id
   ORDER BY order_id
 ) orders_with_prices);
+ --- WITH example upper task
+WITH orders_with_prices AS (
+  SELECT order_id ,sum(p.price * pto.quantity) total_price
+  FROM products p
+  JOIN products_to_orders pto ON pto.product_id = p.id
+  GROUP BY order_id
+  ORDER BY order_id
+), avg_price AS (
+  SELECT avg(total_price)
+  FROM orders_with_prices
+)
+SELECT order_id, total_price
+FROM orders_with_prices
+WHERE total_price > (SELECT * FROM avg_price);
+
 
 
