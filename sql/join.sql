@@ -42,5 +42,16 @@ products_to_orders pto -- right
 ON p.id = pto.product_id
 ORDER BY p.id;
 
+SELECT *
+FROM
+products p -- left
+RIGHT JOIN
+products_to_orders pto -- right
+ON p.id = pto.product_id
+ORDER BY p.id;
+
+
+
+
 
 
