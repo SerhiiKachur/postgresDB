@@ -1,10 +1,27 @@
-const express = require('express');
+const express = require("express");
+const UserController = require('./controllers/userController');
 
 const app = express();
 
-app.get('/', (req,res) => {
-  res.send('test');
+const bodyParser = express.json();
+
+app.get("/", (req, res) => {
+  res.send("test");
 });
 
-module.exports = app;
+app.post(
+  "/users",
+  bodyParser,
+  (req, res, next) => {
+    req.test = 212324;
+    next();
+  },
+  (req, res) => {
+    console.log(req.test);
+    console.log(req.body);
+    res.send(req.body);
+  },
+  UserController.createUser
+);
 
+module.exports = app;
