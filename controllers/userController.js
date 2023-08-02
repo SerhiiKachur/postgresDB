@@ -8,4 +8,10 @@ module.exports.getUser = (req, res) => {};
 
 module.exports.updateUser = (req, res) => {};
 
-module.exports.deleteUser = (req, res) => {};
+module.exports.deleteUser = (req, res) => {
+  const {
+    params: { userID },
+  } = req;
+  
+  res.send(`user ${userID} is deleted`);
+};
