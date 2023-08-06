@@ -1,3 +1,4 @@
+const {Op}  = require('sequelize');
 const { User } = require("../models");
 
 module.exports.createUser = async (req, res) => {
@@ -8,7 +9,29 @@ module.exports.createUser = async (req, res) => {
   res.send({ data: user });
 };
 
-module.exports.getUsers = (req, res) => {};
+module.exports.getUsers = async (req, res) => {
+  // const users = await User.findAll({
+  //   attributes: [['first_name','name'], 'email', 'isMale'],
+  // });
+  // const users = await User.findAll({
+  //   attributes: {
+  //     exclude: ['password','createdAt','updatedAt']
+  //   }
+  // });
+  // const users = await User.findAll({
+  //   where: {
+  //     isMale: true
+  //   }
+  // })
+
+  const users = await User.findAll({
+    where: {
+      [Op.or]:[{firstName:'User'},{id:5}],
+    }
+  })
+
+  res.send({data:users});
+};
 
 module.exports.getUser = (req, res) => {};
 
