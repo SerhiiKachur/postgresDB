@@ -11,7 +11,7 @@ userRouter
   .post(UserController.createUser);
 
 userRouter
-  .route("/users/:userID")
+  .route("/users/:userId")
   .get(UserController.getUser)
   .put(UserController.updateUser)
   .delete(UserController.deleteUser);
