@@ -71,10 +71,41 @@ module.exports.updateUser = async (req, res) => {
   res.send({ data: userWithoutPassword });
 };
 
-module.exports.deleteUser = (req, res) => {
+module.exports.updateUserInstance = async (req, res) => {
+  const {
+    body,
+    params: { userId },
+  } = req;
+
+  const userToUpdate = await User.findByPk(userId);
+
+  const updatedUser = await userToUpdate.update(body);
+
+  res.send({ data: updatedUser });
+};
+
+module.exports.deleteUser = async (req, res) => {
   const {
     params: { userId },
   } = req;
 
-  res.send(`user ${userId} is deleted`);
+  const deletedUser = await User.destroy({
+    where: {
+      id: userId,
+    },
+  });
+
+  res.send({ data: deletedUser });
+};
+
+module.exports.deleteUserInstance = async (req, res) => {
+  const {
+    params: { userId },
+  } = req;
+
+  const user = await User.findByPk(userId);
+
+  await user.destroy();
+  
+  res.send({data:user});
 };

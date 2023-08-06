@@ -1,9 +1,8 @@
-const express = require('express');
+const express = require("express");
 const UserController = require("../controllers/userController");
 const userRouter = express.Router();
 
 // userRouter.use()
-
 
 userRouter
   .route("/users")
@@ -15,5 +14,9 @@ userRouter
   .get(UserController.getUser)
   .put(UserController.updateUser)
   .delete(UserController.deleteUser);
+
+userRouter.put("/users/v2/:userId", UserController.updateUserInstance);
+userRouter.delete("/users/v2/:userId", UserController.deleteUserInstance);
+
 
 module.exports = userRouter;
