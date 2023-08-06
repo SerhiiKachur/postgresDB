@@ -1,4 +1,4 @@
-const {Op}  = require('sequelize');
+const { Op } = require("sequelize");
 const { User } = require("../models");
 
 module.exports.createUser = async (req, res) => {
@@ -26,21 +26,38 @@ module.exports.getUsers = async (req, res) => {
 
   const users = await User.findAll({
     where: {
-      [Op.or]:[{firstName:'User'},{id:5}],
-    }
-  })
+      [Op.or]: [{ firstName: "User" }, { id: 5 }],
+    },
+  });
 
-  res.send({data:users});
+  res.send({ data: users });
 };
 
-module.exports.getUser = (req, res) => {};
+module.exports.getUser = async (req, res) => {
+  const {
+    params: { userId },
+  } = req;
+  // const user = await User.findOne({
+  //   where: {
+  //     id: userId,
+  //   },
+  // });
+
+  const user = await User.findByPk(userId,{
+    attributes: {
+      exclude:['password'],
+    },
+  });
+
+  res.send({ data: user });
+};
 
 module.exports.updateUser = (req, res) => {};
 
 module.exports.deleteUser = (req, res) => {
   const {
-    params: { userID },
+    params: { userId },
   } = req;
 
-  res.send(`user ${userID} is deleted`);
+  res.send(`user ${userId} is deleted`);
 };
