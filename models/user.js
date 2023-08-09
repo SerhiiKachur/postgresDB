@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(Task) {
       // define association here
       User.hasMany(Task,{
-        foreignKey: 'userId'
+        foreignKey: 'userId',
+        onDelete:'cascade',
+        onUpdate:'cascade'
       })
     }
   }

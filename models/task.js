@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Task.belongsTo(models.User, {
-        foreignKey:'userId'
+        foreignKey:'userId',
+        onDelete:'cascade',
+        onUpdate:'cascade'
       });
     }
   }
