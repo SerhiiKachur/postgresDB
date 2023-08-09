@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         field: "is_done",
         allowNull: false,
+        defaultValue:false,
         validate: { notEmpty: true },
       },
       deadline: { type: DataTypes.DATE, validate: { isDate: true } },
