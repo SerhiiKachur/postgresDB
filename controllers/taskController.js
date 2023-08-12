@@ -3,14 +3,10 @@ const { Task, User } = require("../models");
 
 module.exports.createTask = async (req, res, next) => {
   try {
-    const {
-      body,
-      params: { userId },
-    } = req;
+    const { body, user } = req;
 
     // const newTask = await Task.create({...body, userId});
 
-    const user = await User.findByPk(userId);
     const newTask = await user.createTask(body);
 
     res.status(201).send({ data: newTask });
@@ -21,16 +17,14 @@ module.exports.createTask = async (req, res, next) => {
 
 module.exports.getTasks = async (req, res, next) => {
   try {
-    const {
-      params: { userId },
-    } = req;
+    const { user } = req;
 
     // const task = await Task.findAll({
     //   where: {
     //     userId,
     //   },
     // });
-    const user = await User.findByPk(userId);
+
     const tasks = await user.getTasks();
 
     res.send({ data: tasks });
@@ -42,7 +36,8 @@ module.exports.getTasks = async (req, res, next) => {
 module.exports.getTask = async (req, res, next) => {
   try {
     const {
-      params: { userId, taskId },
+      user,
+      params: { taskId },
     } = req;
 
     // const task = await Task.findOne({
@@ -52,7 +47,6 @@ module.exports.getTask = async (req, res, next) => {
     //   },
     // });
 
-    const user = await User.findByPk(userId);
     const task = await Task.findByPk(taskId);
 
     const userHasTask = await user.hasTask(task);
@@ -61,6 +55,57 @@ module.exports.getTask = async (req, res, next) => {
       return next(createHttpError(404, "User doesnt have this task"));
     }
 
+    res.send({ data: task });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports.updateTask = async (req, res, next) => {
+  try {
+    const {
+      body,
+      user,
+      params: { taskId },
+    } = req;
+
+    const [updateCount, [updatedTask]] = await Task.update(body, {
+      where: {
+        id: taskId,
+        userId: user.id,
+      },
+      fields: ["body", "isDone", "updatedAt", "deadline"],
+      returning: true,
+    });
+
+    if (updateCount !== 1) {
+      return next(createHttpError(404, "Task not found"));
+    }
+
+    res.send({ data: updatedTask });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports.deleteTaks = async (req, res, next) => {
+  try {
+    const {
+      user,
+      params: { taskId },
+    } = req;
+
+    const task = await Task.findOne({
+      where: {
+        id: taskId,
+        userId:user.id,
+      },
+    });
+
+    if (!task) {
+      return next(createHttpError(404, "Task not found"));
+    }
+    await task.destroy();
     res.send({ data: task });
   } catch (error) {
     next(error);
