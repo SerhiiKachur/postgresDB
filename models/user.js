@@ -8,13 +8,19 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({Task}) {
+    static associate({ Task, Group }) {
       // define association here
-      User.hasMany(Task,{
-        foreignKey: 'userId',
-        onDelete:'cascade',
-        onUpdate:'cascade'
-      })
+      User.hasMany(Task, {
+        foreignKey: "userId",
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      });
+      User.belongsToMany(Group, {
+        through: "users_to_groups",
+        foreignKey: "userId",
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      });
     }
   }
   User.init(
