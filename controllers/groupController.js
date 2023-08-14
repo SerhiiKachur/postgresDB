@@ -28,13 +28,21 @@ module.exports.getUserGroups = async (req, res, next) => {
       params: { userId },
     } = req;
 
-    const user = await User.findByPk(userId);
+    const userWithGroups = await User.findByPk(userId, {
+      include: {
+        model: Group,
+        through: {
+          attributes: [],
+        },
+        attributes: ["id", "name", "description", "imagePath"],
+      },
+    });
 
-    if (!user) {
+    if (!userWithGroups) {
       return next(createHttpError(404, "User doesnt exist"));
     }
 
-    const groups = await user.getGroups();
+    // const groups = await user.getGroups();
 
     res.send({ data: groups });
   } catch (error) {
