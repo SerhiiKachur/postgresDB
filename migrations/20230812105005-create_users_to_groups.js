@@ -11,7 +11,7 @@ module.exports = {
         field:'user_id',
         references:{
           model:'users',
-          key:id,
+          key:'id',
         },
         onDelete:'cascade',
         onUpdate:'cascade'
@@ -23,7 +23,7 @@ module.exports = {
         field:'group_id',
         references:{
           model:'groups',
-          key:id,
+          key:'id',
         },
         onDelete:'cascade',
         onUpdate:'cascade'
@@ -42,6 +42,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("users");
+    await queryInterface.dropTable("users_to_groups");
   },
 };

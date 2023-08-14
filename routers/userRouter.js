@@ -1,8 +1,8 @@
 const express = require("express");
 const taskRouter = require("./taskRouter");
 const UserController = require("../controllers/userController");
+const GropController = require('../controllers/groupController');
 const { checkUserExistanceMW } = require("../middlewares/users.mv");
-
 const userRouter = express.Router();
 
 userRouter
@@ -18,6 +18,8 @@ userRouter
 
 userRouter.put("/v2/:userId", UserController.updateUserInstance);
 userRouter.delete("/v2/:userId", UserController.deleteUserInstance);
+
+userRouter.get("/:userId/groups",GropController.getUserGroups);
 
 userRouter.use("/:userId/tasks", checkUserExistanceMW, taskRouter);
 
